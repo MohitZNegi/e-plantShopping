@@ -163,6 +163,24 @@ body {
 .cart{
     color: white;
     display: flex;
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .cart_quantity_count{
     margin-top: 16px;
@@ -351,6 +369,18 @@ body {
 
 .add-to-cart-btn:active {
     transform: scale(0.98);
+}
+
+.add-to-cart-btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.add-to-cart-btn:disabled:hover {
+    background-color: #cccccc;
+    transform: none;
 }
 
 /* Responsive Design for Plants Grid */
