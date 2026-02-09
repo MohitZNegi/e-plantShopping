@@ -250,3 +250,166 @@ body {
         text-align: center; /* Align text to the center */
       }
   }
+
+/* Category Section Styling */
+.category-section {
+    width: 100%;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+}
+
+.category-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 3px solid #4CAF50;
+    padding-bottom: 15px;
+}
+
+/* Plants Grid */
+.plants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 0 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Plant Card */
+.plant-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.plant-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Plant Image */
+.plant-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Plant Name */
+.plant-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* Plant Description */
+.plant-description {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Plant Price */
+.plant-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 5px 0;
+}
+
+/* Add to Cart Button */
+.add-to-cart-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    margin-top: auto;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.add-to-cart-btn:active {
+    transform: scale(0.98);
+}
+
+/* Responsive Design for Plants Grid */
+@media (max-width: 1200px) {
+    .plants-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .plants-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+        padding: 0 10px;
+    }
+
+    .category-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .plant-image {
+        height: 150px;
+    }
+
+    .plant-name {
+        font-size: 16px;
+    }
+
+    .plant-price {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .plants-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+
+    .category-title {
+        font-size: 18px;
+        padding-bottom: 10px;
+    }
+
+    .plant-image {
+        height: 120px;
+    }
+
+    .plant-name {
+        font-size: 14px;
+    }
+
+    .plant-price {
+        font-size: 16px;
+    }
+
+    .add-to-cart-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
