@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // Redux Hooks:
 // - useSelector: Hook to access/read data from Redux store's state
 // - useDispatch: Hook to dispatch actions to Redux store
@@ -66,6 +66,79 @@ const CartItem = ({ onContinueShopping }) => {
   const calculateTotalCost = (item) => {
     return (parseFloat(item.cost.replace("$", "")) * item.quantity).toFixed(2);
   };
+  // UI state for in-page modal/toast
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
+  const handleCheckout = () => {
+    const total = calculateTotalAmount();
+    if (!cart || cart.length === 0) {
+      setToastMessage("Your cart is empty. Add items before checking out.");
+      setShowToast(true);
+      return;
+    }
+
+    // Show in-page confirmation modal
+    setShowConfirm(true);
+  };
+
+  const handleConfirmProceed = () => {
+    const total = calculateTotalAmount();
+    setShowConfirm(false);
+    setToastMessage(
+      `Thank you for your purchase! Your card will be charged $${total}.`,
+    );
+    setShowToast(true);
+  };
+
+  const handleConfirmCancel = () => {
+    setShowConfirm(false);
+    setToastMessage("Checkout canceled.");
+    setShowToast(true);
+  };
+
+  // Auto-hide toast after 3 seconds
+  useEffect(() => {
+    if (!showToast) return;
+    const id = setTimeout(() => setShowToast(false), 3000);
+    return () => clearTimeout(id);
+  }, [showToast]);
+
+  // Inline styles for modal and toast
+  const modalOverlayStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0,0,0,0.4)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1000,
+  };
+
+  const modalStyle = {
+    background: "#fff",
+    padding: "20px",
+    borderRadius: "8px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+    maxWidth: "90%",
+    width: "360px",
+    textAlign: "center",
+  };
+
+  const toastStyle = {
+    position: "fixed",
+    top: "20px",
+    right: "20px",
+    background: "#333",
+    color: "#fff",
+    padding: "10px 14px",
+    borderRadius: "6px",
+    zIndex: 1100,
+  };
 
   return (
     <div className="cart-container">
@@ -124,8 +197,41 @@ const CartItem = ({ onContinueShopping }) => {
           Continue Shopping
         </button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1" onClick={handleCheckout}>
+          Checkout
+        </button>
       </div>
+      {/* Confirmation Modal */}
+      {showConfirm && (
+        <div style={modalOverlayStyle} className="cart-modal-overlay">
+          <div style={modalStyle} className="cart-modal">
+            <h3>Confirm Checkout</h3>
+            <p>Your order total is ${calculateTotalAmount()}.</p>
+            <div style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
+              <button
+                className="get-started-button"
+                onClick={handleConfirmProceed}
+              >
+                Proceed
+              </button>
+              <button
+                className="get-started-button"
+                style={{ backgroundColor: "#f04141" }}
+                onClick={handleConfirmCancel}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Toast Message */}
+      {showToast && (
+        <div style={toastStyle} className="cart-toast">
+          {toastMessage}
+        </div>
+      )}
     </div>
   );
 };
